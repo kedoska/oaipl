@@ -11,7 +11,11 @@ def main():
     client_repo = InMemoryClientRepository()
     permission_repo = InMemoryPermissionRepository()
 
-    app = OnboardingAPI(5003, software_repo, client_repo, permission_repo)
+    app = OnboardingAPI(5003,
+                        software_repo,
+                        client_repo,
+                        permission_repo
+                        )
     app.run()
 
 
