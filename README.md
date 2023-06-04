@@ -1,6 +1,17 @@
-# ChatGPT plugins quickstart
+# Onboarding API - OpenAI ChatGPT-4 Plugin
 
-Get a todo list ChatGPT plugin up and running in under 5 minutes using Python. If you do not already have plugin developer access, please [join the waitlist](https://openai.com/waitlist/plugins).
+This repository contains a **proof-of-concept (PoC)** project demonstrating the potential of OpenAI's ChatGPT-4 plugins in streamlining complex procedures, such as the onboarding of new clients or providers into a company. The Onboarding API plugin provides a conversational interface, aiming to make these processes more user-friendly and efficient.
+
+
+## Overview
+The Onboarding API interacts with key entities such as Software, Client, and Permission. It provides a CRUD REST API, defined using the OpenAPI (Swagger) specification, enabling operators to view and filter software, clients, and permissions.
+
+This PoC was built using Python and the Quart async web framework, adhering to Domain-Driven Design principles to ensure organized and maintainable code. For the purpose of this PoC, we implemented in-memory data structures for storage, making it ideal for demonstration and testing purposes.
+
+<img src="https://user-images.githubusercontent.com/11739105/243170004-0502948a-1f79-4d18-a05b-6ccca60d7001.png" alt="screenshot">
+
+## Note
+While this is not a production-ready solution, it serves as a valuable exploration of the capabilities of ChatGPT-4 plugins. The insights gained from this project will undoubtedly contribute to future developments.
 
 ## Setup
 
