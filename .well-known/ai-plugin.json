@@ -1,18 +1,18 @@
 {
     "schema_version": "v1",
-    "name_for_human": "TODO List (no auth)",
-    "name_for_model": "todo",
-    "description_for_human": "Manage your TODO list. You can add, remove and view your TODOs.",
-    "description_for_model": "Plugin for managing a TODO list, you can add, remove and view your TODOs.",
+    "name_for_human": "Onboarding API",
+    "name_for_model": "onboarding",
+    "description_for_human": "Manage your company's software onboarding. You can view and filter software, clients, and permissions.",
+    "description_for_model": "Plugin for managing a company's software onboarding process, you can view and filter software, clients, and permissions.",
     "auth": {
       "type": "none"
     },
     "api": {
       "type": "openapi",
-      "url": "http://localhost:5003/openapi.yaml",
+      "url": "http://localhost:5003/openapi.yaml"
     },
     "logo_url": "http://localhost:5003/logo.png",
-    "contact_email": "legal@example.com",
+    "contact_email": "marco.casula@gmail.com",
     "legal_info_url": "http://example.com/legal"
   }
   

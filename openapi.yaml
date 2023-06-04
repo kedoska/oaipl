@@ -1,93 +1,174 @@
 openapi: 3.0.1
 info:
-  title: TODO Plugin
-  description: A plugin that allows the user to create and manage a TODO list using ChatGPT. If you do not know the user's username, ask them first before making queries to the plugin. Otherwise, use the username "global".
+  title: Onboarding API
+  description: Plugin for managing a company's software onboarding process, you can view and filter software, clients, and permissions.
   version: 'v1'
 servers:
   - url: http://localhost:5003
 paths:
-  /todos/{username}:
+  /software:
     get:
-      operationId: getTodos
-      summary: Get the list of todos
-      parameters:
-      - in: path
-        name: username
-        schema:
-            type: string
-        required: true
-        description: The name of the user.
+      operationId: getSoftware
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getTodosResponse'
-    post:
-      operationId: addTodo
-      summary: Add a todo to the list
-      parameters:
-      - in: path
-        name: username
-        schema:
-            type: string
-        required: true
-        description: The name of the user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/addTodoRequest'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Software'
+      summary: Get all software
+  /software/{id}:
+    get:
+      operationId: getSoftwareById
       responses:
-        "200":
+        '200':
           description: OK
-    delete:
-      operationId: deleteTodo
-      summary: Delete a todo from the list
-      parameters:
-      - in: path
-        name: username
-        schema:
-            type: string
-        required: true
-        description: The name of the user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/deleteTodoRequest'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Software'
+      summary: Get a specific software by ID
+  /software/{id}/clients:
+    get:
+      operationId: getClientsBySoftwareId
       responses:
-        "200":
+        '200':
           description: OK
-
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+      summary: Get all clients for a specific software
+  /software/{id}/permissions:
+    get:
+      operationId: getPermissionsBySoftwareId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Permission'
+      summary: Get all permissions for a specific software
+  /client:
+    get:
+      operationId: getClients
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+      summary: Get all clients
+  /client/{id}:
+    get:
+      operationId: getClientById
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+      summary: Get a specific client by ID
+  /client/{id}/software:
+    get:
+      operationId: getSoftwareByClientId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Software'
+      summary: Get all software for a specific client
+  /permission:
+    get:
+      operationId: getPermissions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Permission'
+      summary: Get all permissions
+  /permission/{id}:
+    get:
+      operationId: getPermissionById
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Permission'
+      summary: Get a specific permission by ID
 components:
   schemas:
-    getTodosResponse:
+    Software:
       type: object
       properties:
-        todos:
+        id:
+          type: string
+        name:
+          type: string
+        internalCode:
+          type: string
+        tags:
           type: array
           items:
             type: string
-          description: The list of todos.
-    addTodoRequest:
-      type: object
-      required:
-      - todo
-      properties:
-        todo:
+        productOwner:
           type: string
-          description: The todo to add to the list.
-          required: true
-    deleteTodoRequest:
+        technicalOwners:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    Client:
       type: object
-      required:
-      - todo_idx
       properties:
-        todo_idx:
-          type: integer
-          description: The index of the todo to delete.
-          required: true
+        id:
+          type: string
+        name:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        software:
+          type: array
+          items:
+            $ref: '#/components/schemas/Software'
+    Permission:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        expiration:
+          type: string
+        technicalOwner:
+          type: string
